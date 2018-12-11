@@ -24,6 +24,11 @@
     }
     
     http://cs.oswego.edu/pipermail/concurrency-interest/2010-February/006886.html
+    https://stackoverflow.com/questions/28772539/why-setarray-method-call-required-in-copyonwritearraylist
+    
+    
+The reason this code calls setArray even when it's apparently unnecessary is so that it establishes an invariant for this method that it always performs a volatile write to this array. This establishes happens-before semantics with other threads that perform volatile reads from this array. This is important because the volatile write-read semantics apply to reads and writes other than those of the volatile field itself. Specifically, writes to other (non-volatile) fields before a volatile write happen-before reads from those other fields after a volatile read of the same volatile variable. 
+    
     
     第17-18行的意义：
     这个hb意义何在？如下例子：a为非volatile的某基本类型变量,coal为CopyOnWriteArrayList对象
