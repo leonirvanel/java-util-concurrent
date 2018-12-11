@@ -23,6 +23,8 @@
         }
     }
     
+    http://cs.oswego.edu/pipermail/concurrency-interest/2010-February/006886.html
+    
     第17-18行的意义：
     这个hb意义何在？如下例子：a为非volatile的某基本类型变量,coal为CopyOnWriteArrayList对象
 t1:
