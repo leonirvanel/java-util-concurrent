@@ -49,3 +49,14 @@ n:int tmp = a;
 
 ## ConcurrentHashMap
 
+
+## InterruptedException
+我们讨论运行线程t1的状态。中断t1的线程是t2
+### 怎么产生的呢？
+1、如果t1在运行阻塞方法（sleep/wait/poll），那么会产生InterruptedException。并且isInterrupted状态已经清空。
+2、如果t1仅仅在跑计算，那么会设置isInterrupted会设置为true
+### 如何处理呢？
+1、可以简单的往上抛。
+2、如果不能继续往上层抛异常的话，那么应该手动恢复状态Thread.currentThread().interrupt（）。其他其他线程t2、t3能通过t1.isInterrpted来判断，t1是成功跑完任务了呢，还是被啥坏家伙异常中断了。
+
+
